@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "File Upload & Download";
+    Layout = "_Layout";
+    // Ensure System.IO is referenced
+    var files = ViewBag.Files as string[];
+}
+
+<h2>Upload Contract</h2>
+
+<form asp-action="Upload" asp-controller="File" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="file">Select a file:</label>
+        <input type="file" name="file" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>
+
+<hr />
+
+<h2>Available Files</h2>
+
+@if (files != null && files.Length > 0)
+{
+    <ul>
+        @foreach (var file in files)
+        {
+            var fileName = System.IO.Path.GetFileName(file); // Use fully qualified name
+            <li>
+                <a asp-action="Download" asp-route-fileName="@fileName" asp-controller="File">@fileName</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No files available.</p>
+}

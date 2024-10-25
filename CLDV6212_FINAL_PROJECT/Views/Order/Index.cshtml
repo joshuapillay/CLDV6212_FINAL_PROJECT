@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Order>
+
+<h2>Orders</h2>
+<a asp-action="Create">Create Order</a>
+
+<table class="table">
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Customer</th>
+        <th>Order Date</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Product.ProductName</td>
+            <td>@item.Quantity</td>
+            <td>@item.CustomerProfile.FullName</td>
+            <td>@item.OrderDate</td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>
+            </td>
+        </tr>
+    }
+</table>

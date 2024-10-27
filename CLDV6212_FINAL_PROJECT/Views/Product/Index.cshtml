@@ -1,7 +1,11 @@
 ﻿@model IEnumerable<CLDV6212_FINAL_PROJECT.Models.Product>
 
 <h2>Products</h2>
-<a asp-action="Create">Add New Product</a>
+
+@if (User.IsInRole("Admin"))
+{
+    <a asp-action="Create" class="btn btn-primary">Add New Product</a>
+}
 
 <table class="table">
     <tr>
@@ -24,7 +28,10 @@
             <td>@item.Price</td>
             <td>@item.Description</td>
             <td>
-                <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-danger">Delete</a>
+                }
             </td>
         </tr>
     }

@@ -19,7 +19,10 @@
             <td>@item.CustomerProfile.FullName</td>
             <td>@item.OrderDate</td>
             <td>
-                <a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>
+                }
             </td>
         </tr>
     }

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CLDV6212_FINAL_PROJECT.Controllers
 {
@@ -21,7 +22,7 @@ namespace CLDV6212_FINAL_PROJECT.Controllers
             var products = await _context.Products.ToListAsync();
             return View(products);
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();

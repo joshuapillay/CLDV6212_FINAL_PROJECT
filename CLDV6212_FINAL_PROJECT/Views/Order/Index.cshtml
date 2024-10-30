@@ -1,29 +1,127 @@
 ﻿@model IEnumerable<Order>
 
-<h2>Orders</h2>
-<a asp-action="Create">Create Order</a>
+<h2 class="page-title">Your Orders</h2>
 
-<table class="table">
-    <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Customer</th>
-        <th>Order Date</th>
-        <th></th>
-    </tr>
+
+    <a asp-action="Create" class="btn btn-primary create-order-btn">Create New Order</a>
+
+
+<div class="order-grid">
     @foreach (var item in Model)
     {
-        <tr>
-            <td>@item.Product.ProductName</td>
-            <td>@item.Quantity</td>
-            <td>@item.CustomerProfile.FullName</td>
-            <td>@item.OrderDate</td>
-            <td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>
-                }
-            </td>
-        </tr>
+        <div class="order-card">
+            <div class="order-details">
+                <h3 class="order-product">@item.Product.ProductName</h3>
+                <p><strong>Quantity:</strong> @item.Quantity</p>
+                <p><strong>Customer:</strong> @item.CustomerProfile.FullName</p>
+                <p><strong>Order Date:</strong> @item.OrderDate.ToString("MMMM dd, yyyy")</p>
+            </div>
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="order-actions">
+                    <a asp-action="Delete" asp-route-id="@item.OrderId" class="btn btn-danger">Delete</a>
+                </div>
+            }
+        </div>
     }
-</table>
+</div>
+
+<style>
+    /* Background styling */
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url('https://coolbackgrounds.io/images/backgrounds/white/white-unsplash-9d0375d2.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: center center;
+        color: #333;
+    }
+
+    /* Page title styling */
+    .page-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin: 20px 0;
+        color: #333;
+        font-weight: bold;
+    }
+
+    /* Create Order button styling */
+    .create-order-btn {
+        display: block;
+        width: fit-content;
+        margin: 0 auto 20px auto;
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+        transition: background-color 0.3s;
+        text-decoration: none;
+    }
+
+        .create-order-btn:hover {
+            background-color: #0056b3;
+        }
+
+    /* Order grid styling */
+    .order-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: auto;
+        background-color: rgba(255, 255, 255, 0.8); /* Light overlay for readability */
+        border-radius: 10px;
+    }
+
+    /* Order card styling */
+    .order-card {
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+        .order-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+    /* Order details styling */
+    .order-details {
+        margin-bottom: 15px;
+    }
+
+    .order-product {
+        font-size: 1.5rem;
+        color: #007bff;
+        margin-bottom: 10px;
+    }
+
+    /* Order actions */
+    .order-actions .btn {
+        width: 100%;
+        padding: 10px;
+        font-weight: bold;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        transition: background-color 0.3s;
+    }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+</style>

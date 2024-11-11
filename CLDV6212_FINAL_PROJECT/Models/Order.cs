@@ -10,7 +10,7 @@ namespace CLDV6212_FINAL_PROJECT.Models
 
         [Required(ErrorMessage = "Please select a product.")]
         public int ProductId { get; set; }
-        public Product? Product { get; set; }  // Make nullable
+        public Product? Product { get; set; }  
 
         [Required(ErrorMessage = "Quantity is required.")]
         [Range(1, int.MaxValue, ErrorMessage = "Quantity must be at least 1.")]
@@ -21,6 +21,6 @@ namespace CLDV6212_FINAL_PROJECT.Models
 
         [Required(ErrorMessage = "Please select a customer.")]
         public int CustomerProfileId { get; set; }
-        public CustomerProfile? CustomerProfile { get; set; }  // Make nullable
+        public CustomerProfile? CustomerProfile { get; set; }  
     }
 }

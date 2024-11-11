@@ -13,7 +13,7 @@ namespace CLDV6212_FINAL_PROJECT.Models
         public string ProductName { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")] // Specify precision and scale for decimal
+        [Column(TypeName = "decimal(18,2)")] 
         public decimal Price { get; set; }
 
         [StringLength(500)]

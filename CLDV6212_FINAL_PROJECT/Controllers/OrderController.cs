@@ -36,15 +36,12 @@ namespace CLDV6212_FINAL_PROJECT.Controllers
         {
             _logger.LogInformation("Preparing to create a new order...");
 
-            // Fetch products and customers as strongly-typed lists
             var products = _context.Products.ToList();
             var customers = _context.CustomerProfiles.ToList();
 
-            // Assign to ViewBag for use in the view
             ViewBag.Products = products;
             ViewBag.Customers = customers;
 
-            // Check for empty lists with .Count instead of .Any() to avoid the dynamic issue
             if (products.Count == 0)
             {
                 _logger.LogWarning("No products found.");
